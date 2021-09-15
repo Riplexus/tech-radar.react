@@ -14,4 +14,13 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  cursor: pointer;
+  user-select: none;
 }
+
+.TechRadar-tooltip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+

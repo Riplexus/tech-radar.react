@@ -1,0 +1,14 @@
+.Tooltip {
+  position: absolute;
+  top: calc(var(--y) * 1px);
+  left: calc(var(--x) * 1px);
+  font-size: 1rem;
+}
+
+.Tooltip > * {
+  position: absolute;
+  padding: 5px;
+  max-width: 400px;
+  transform: translate(calc(var(--translateX)*1% + var(--offsetX)*1px), calc(var(--translateY)*1% + var(--offsetY)*1px));
+
+}

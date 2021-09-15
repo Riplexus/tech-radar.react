@@ -1,13 +1,22 @@
 import TechRadar from '@Organisms/TechRadar';
+import { useState } from 'react';
 import './Page.css';
 
 const COLORS = [
-  ['#282C34', '#2D313A', '#2B2F37', '#2A2E36'],
-  ['#353A44', '#323741', '#373C47', '#363B46'],
-  ['#3C414D', '#3F4451', '#414754', '#3F4451'],
-  ['#4A5261', '#454C5A', '#484F5E', '#495160'],
-  ['#525A6A', '#4F5767', '#545C6D', '#535B6C'],
-  ['#596274', '#5C6577', '#5E677A', '#5C6577'],
+  ['#282C34', '#2D313A', '#2B2F37', '#2A2E36', '#282C34', '#2D313A'],
+  ['#353A44', '#323741', '#373C47', '#363B46', '#353A44', '#323741'],
+  ['#3C414D', '#3F4451', '#414754', '#3F4451', '#3C414D', '#3F4451'],
+  ['#4A5261', '#454C5A', '#484F5E', '#495160', '#4A5261', '#454C5A'],
+  ['#525A6A', '#4F5767', '#545C6D', '#535B6C', '#525A6A', '#4F5767'],
+  ['#596274', '#5C6577', '#5E677A', '#5C6577', '#596274', '#5C6577'],
+];
+
+const HIGHLIGHT_COLORS = [
+  ['rgba(190, 198, 212, .2)'],
+  ['rgba(190, 198, 212, .3)'],
+  ['rgba(190, 198, 212, .4)'],
+  ['rgba(190, 198, 212, .45)'],
+  ['rgba(190, 198, 212, .5)'],
 ];
 
 const SECTIONS = [
@@ -101,13 +110,50 @@ const ITEMS = [
 ];
 
 function Page() {
+  const [highlightedRingId, setHighlightedRingId] = useState();
+  const [highlightedSectionId, setHighlightedSectionId] = useState();
+
   return (
     <div className="Page">
-      <TechRadar 
-        sections={SECTIONS} 
-        rings={RINGS} 
-        items={ITEMS} 
-        colors={COLORS} />
+      <section>
+        <ul onMouseLeave={() => setHighlightedRingId(null)}>
+          {RINGS.map(ring => 
+            <li key={ring.id} onMouseOver={() => setHighlightedRingId(ring.id)}>
+              <p>{ring.name}</p>
+              <small>{ring.description}</small>
+            </li>
+          )}
+        </ul>
+
+        <TechRadar 
+          sections={SECTIONS} 
+          rings={RINGS} 
+          items={ITEMS} 
+          colors={COLORS}
+          highlightColors={HIGHLIGHT_COLORS}
+          highlightedRingId={highlightedRingId}
+          highlightedSectionId={highlightedSectionId} />
+
+        <ul onMouseLeave={() => setHighlightedSectionId(null)}>
+          {SECTIONS.map(section => 
+            <li key={section.id} onMouseOver={() => setHighlightedSectionId(section.id)}>
+              <p>{section.name}</p>
+              <small>{section.description}</small>
+            </li>
+          )}
+        </ul>
+      </section>
+
+      <section>
+        <ul>
+          {ITEMS.map(item => 
+            <li key={item.id}>
+              <p>{item.name}</p>
+              <small>{item.description}</small>
+            </li>
+          )}
+        </ul>
+      </section>
     </div>
   );
 }
