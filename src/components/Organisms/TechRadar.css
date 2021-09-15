@@ -1,0 +1,17 @@
+.TechRadar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.TechRadar-viewport {
+  width: min(var(--width), var(--height));
+  height: min(var(--width), var(--height));
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
