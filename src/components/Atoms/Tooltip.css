@@ -2,7 +2,7 @@
   position: absolute;
   top: calc(var(--y) * 1px);
   left: calc(var(--x) * 1px);
-  font-size: 1rem;
+  font-size: 11px;
 }
 
 .Tooltip > * {
@@ -10,5 +10,11 @@
   padding: 5px;
   max-width: 400px;
   transform: translate(calc(var(--translateX)*1% + var(--offsetX)*1px), calc(var(--translateY)*1% + var(--offsetY)*1px));
+}
 
+.Tooltip small {
+  white-space: nowrap;
+}
+.Tooltip p {
+  font-size: 11px;
 }

@@ -1,28 +1,14 @@
 .Page {
-  background-color: #282c34;
   min-height: calc(100vh - 24px);
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: #bec6d4;
   padding: 24px;
 }
-
-.Page ::selection {
-  background: #282c34;
-  color: #bec6d4;
-}
-
 .Page .TechRadar {
   min-height: 70vh;
 }
-
-.Tooltip > * {
-  background: rgba(190, 198, 212, 1);
-  color: #282c34;
-}
-
 section {
   width: 100%;
   display: flex;
@@ -38,24 +24,6 @@ section > .TechRadar {
 }
 section > *:last-child:not(:first-child) {
   text-align: right;
-}
-
-nav {
-  display: flex;
-  justify-content: center;
-  margin-top: 24px;
-  margin-bottom: 12px;
-}
-nav span {
-  cursor: pointer;
-  margin: 0 6px;
-  transition: opacity .2s;
-}
-nav span:not(.active) {
-  opacity: .5;
-}
-nav span:not(.active):hover {
-  opacity: .75;
 }
 
 h3 {
@@ -74,6 +42,31 @@ li {
   margin-bottom: 12px;
   cursor: pointer;
   padding: 6px;
+}
+
+
+/* Theme */
+
+.Page {
+  background-color: #f3f1f1;
+  color: #232427;
+}
+
+.Page ::selection {
+  background: #282c34;
+  color: #bec6d4;
+}
+
+.Item {
+  text-shadow: 0 0 2px #000000;
+  color: #f3f1f1;
+}
+
+.Tooltip > * {
+  box-shadow: 0 0 1px 1px rgba(0, 0, 0, .3);
+  background: #f3f1f1;
+  color: #232427;
+  border-radius: 2px;
 }
 
 li:hover {

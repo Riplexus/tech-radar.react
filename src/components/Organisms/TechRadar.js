@@ -57,9 +57,9 @@ const TechRadar = forwardRef(function TechRadar({ dimensions, sections, rings, i
   let overrideColors = null;
   if (highlightedSectionId !== null) {
     const index = sections.findIndex(({id}) => id === highlightedSectionId);
-    overrideColors = colors.map((ringColors) => {
+    overrideColors = colors.map((ringColors, ringIndex) => {
       const result = [...ringColors];
-      result[index] = highlightColors[0];
+      result[index] = highlightColors[ringIndex][index];
       return result;
     });
   }
@@ -91,7 +91,8 @@ const TechRadar = forwardRef(function TechRadar({ dimensions, sections, rings, i
                 opened={openedItemId === item.id}
                 updatePosition={updateItemPosition(item.id)}>
                 <h3>{item.name}</h3>
-                <span>{item.description}</span>
+                <small>{rings.find(_ => _.id === item.ringId).name} - {sections.find(_ => _.id === item.sectionId).name}</small>
+                <p>{item.description}</p>
               </Item>
             ))}>
           </Ring>
