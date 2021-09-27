@@ -30,11 +30,10 @@ const TechRadar = forwardRef(function TechRadar({ dimensions, sections, rings, i
     itemPositions.sort((a, b) => a.x - b.x);
   };
 
-  const [highlightedItemId, setHighlightedItemId] = useState();
   const [openedItemId, setOpenedItemId] = useState();
-  
-  const onMouseMove = ({clientX, clientY}) => {
-    if (openedItemId) return;
+
+  const onMouseMove = ({clientX, clientY, target}) => {
+    if (target === tooltipRef.current || tooltipRef.current.contains(target)) return;
     let minimumDistance = Infinity;
     let closestItemId = null;
     itemPositions.forEach(({x, y, id}) => {
@@ -44,17 +43,12 @@ const TechRadar = forwardRef(function TechRadar({ dimensions, sections, rings, i
         closestItemId = id;
       }
     });
-    setHighlightedItemId(closestItemId);
+    setOpenedItemId(closestItemId);
   };
 
-  const onMouseLeave = () => setHighlightedItemId(null);
+  const onMouseLeave = () => setOpenedItemId(null);
 
   const tooltipRef = createRef();
-  const onMouseUp = (e) => {
-    if (e.target === tooltipRef.current || tooltipRef.current.contains(e.target)) return;
-    if (e.button !== 0) return;
-    setOpenedItemId(openedItemId ? null : highlightedItemId)
-  };
 
   /*
    * Color handling
@@ -81,21 +75,19 @@ const TechRadar = forwardRef(function TechRadar({ dimensions, sections, rings, i
 
   return (
     <div ref={ref} className="TechRadar" style={cssVariables}>
-      <div 
+      <div
         className="TechRadar-viewport"
-        onMouseMove={onMouseMove} 
-        onMouseLeave={onMouseLeave} 
-        onMouseUp={onMouseUp}>
-        {[...rings].reverse().map((ring, i) => 
+        onMouseMove={onMouseMove}
+        onMouseLeave={onMouseLeave}>
+        {[...rings].reverse().map((ring, i) =>
           <Ring
             key={ring.id}
             position={i}
             radius={ringRadii[i]}
             colors={getColorPalette(ring.id)[i%getColorPalette(ring.id).length]}
-            contents={sections.map(section => items.filter(_ => _.ringId === ring.id && _.sectionId === section.id).map(item => 
-              <Item 
+            contents={sections.map(section => items.filter(_ => _.ringId === ring.id && _.sectionId === section.id).map(item =>
+              <Item
                 key={item.id}
-                highlighted={highlightedItemId === item.id}
                 opened={openedItemId === item.id}
                 updatePosition={updateItemPosition(item.id)}>
                 <h3>{item.name}</h3>
