@@ -22,7 +22,7 @@ section > * {
 section > .TechRadar {
   flex: 2;
 }
-section > *:last-child:not(:first-child) {
+section:not(.ItemList) > *:last-child:not(:first-child) {
   text-align: right;
 }
 
@@ -41,7 +41,45 @@ ul, li, p {
 li {
   margin-bottom: 12px;
   cursor: pointer;
-  padding: 6px;
+  padding: 3px 6px;
+}
+
+.ItemList {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  margin-top: 12px;
+}
+.ItemList > ul {
+  flex: 1.2;
+}
+.ItemList li {
+  margin: 0;
+}
+.ItemList h3 {
+  font-size: 1rem;
+  margin-bottom: 6px;
+  font-weight: normal;
+}
+
+.Page .TechRadar:before {
+  content: '';
+  background-image: url("@/assets/logo_negativ.png");
+  background-size: 15px 15px;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(255, 255, 255, .2);
+  border-radius: 50%;
+  z-index: 1;
+}
+#TechRadar-tooltip {
+  z-index: 10;
 }
 
 

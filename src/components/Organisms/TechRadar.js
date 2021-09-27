@@ -1,4 +1,4 @@
-import { createRef, forwardRef, useState } from "react";
+import {createRef, forwardRef, useEffect, useState} from "react";
 import Item from "@Molecules/Item";
 import Ring from "@Molecules/Ring";
 import withDimensions from "@/hocs/withDimensions";
@@ -6,7 +6,7 @@ import './TechRadar.css';
 
 
 
-const TechRadar = forwardRef(function TechRadar({ dimensions, sections, rings, items, colors, highlightColors, highlightedRingId, highlightedSectionId = null }, ref) {
+const TechRadar = forwardRef(function TechRadar({ dimensions, sections, rings, items, colors, highlightColors, highlightedRingId, highlightedSectionId = null, highlightedItemId }, ref) {
   const width = dimensions?.width ?? 0;
   const height = dimensions?.height ?? 0;
   const cssVariables = {
@@ -49,6 +49,10 @@ const TechRadar = forwardRef(function TechRadar({ dimensions, sections, rings, i
   const onMouseLeave = () => setOpenedItemId(null);
 
   const tooltipRef = createRef();
+
+  useEffect(() => {
+    setOpenedItemId(highlightedItemId);
+  }, [highlightedItemId]);
 
   /*
    * Color handling

@@ -40,6 +40,7 @@ function RingSection({ color, content, width, rotation, position, key }) {
         {content.map((entry, i) => (
           <div key={i} style={{
             '--random': random(),
+            '--random2': random(),
           }}>{entry}</div>
         ))}
       </div>

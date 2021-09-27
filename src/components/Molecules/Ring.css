@@ -46,7 +46,7 @@
   --padding: calc(1500deg / var(--radius));
   content: '';
   display: block;
-  height: calc(100% - var(--random) * 10%); /* Todo This needs to be dependent on the amount of rings */
+  height: calc(100% - var(--random2) * 20%); /* Todo This needs to be dependent on the amount of rings */
   position: absolute;
   bottom: 0;
   transform-origin: left bottom;
