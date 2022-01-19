@@ -1,14 +1,14 @@
-import {createRef, forwardRef, useContext} from "react";
+import {createRef, useRef, useContext} from "react";
 import Item from "@Molecules/Item";
 import Ring from "@Molecules/Ring";
-import withDimensions from "@/hocs/withDimensions";
+import useDimensions from "@/utils/useDimensions";
 import { DataContext } from "@/data/context";
 import './TechRadar.css';
 
-const TechRadar = forwardRef(function TechRadar({ 
-  dimensions
-}, ref) {
+const TechRadar = function TechRadar() {
   const { data, setHighlightedItemId } = useContext(DataContext);
+  const targetRef = useRef();
+  const dimensions = useDimensions({ targetRef });
 
   const width = dimensions?.width ?? 0;
   const height = dimensions?.height ?? 0;
@@ -54,7 +54,7 @@ const TechRadar = forwardRef(function TechRadar({
    */
 
   return (
-    <div ref={ref} className="TechRadar" style={cssVariables}>
+    <div ref={targetRef} className="TechRadar" style={cssVariables}>
       <div
         className="TechRadar-viewport"
         onMouseMove={onMouseMove}
@@ -81,8 +81,8 @@ const TechRadar = forwardRef(function TechRadar({
       <div ref={tooltipRef} id="TechRadar-tooltip"/>
     </div>
   );
-});
+};
 
 TechRadar.displayName = 'TechRadar';
 
-export default withDimensions(TechRadar);
+export default TechRadar;
