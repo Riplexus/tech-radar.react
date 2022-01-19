@@ -1,8 +1,15 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useState, useContext } from 'react';
+import { DataContext } from '@/data/context';
 import Tooltip from '@Atoms/Tooltip';
 import './Item.css';
 
-function Item({ children, updatePosition, highlighted, opened }) {
+function Item({ 
+  children, 
+  item,
+  updatePosition
+}) {
+  const { data } = useContext(DataContext);
+  const opened = data.highlightedItemId === item.id;
   const [position, setPosition] = useState();
 
   const ref = useCallback(node => {
@@ -17,7 +24,6 @@ function Item({ children, updatePosition, highlighted, opened }) {
   }, [updatePosition]);
 
   const classes = ['Item'];
-  if (highlighted) classes.push('highlighted');
   if (opened) classes.push('opened');
 
   return (

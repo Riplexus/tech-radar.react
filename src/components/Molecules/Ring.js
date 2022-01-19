@@ -1,71 +1,46 @@
+import { useContext } from 'react';
+import { DataContext } from '@/data/context';
+import RingCircle from '@Atoms/RingCircle';
+import RingSection from '@Atoms/RingSection';
 import './Ring.css';
 
-function mulberry32(a) {
-  return function() {
-    var t = a += 0x6D2B79F5;
-    t = Math.imul(t ^ t >>> 15, t | 1); // eslint-disable-line
-    t ^= t + Math.imul(t ^ t >>> 7, t | 61); // eslint-disable-line
-    return ((t ^ t >>> 14) >>> 0) / 4294967296; // eslint-disable-line
+function Ring({ 
+  position = 0,
+  children,
+  dimensions,
+  ring
+}) {
+  const { data } = useContext(DataContext);
+
+  const width = dimensions?.width ?? 0;
+  const height = dimensions?.height ?? 0;
+  const maxRadius = Math.min(width, height) / 2;
+  const radius = maxRadius / data.rings.length * (data.rings.length - position);
+
+  let colors = JSON.parse(JSON.stringify(data.colors[position]));
+  if (data.highlightedSectionId) {
+    const index = data.sections.findIndex(({id}) => id === data.highlightedSectionId);
+    colors[index] = data.highlightColors[position][index];
   }
-}
+  if (data.highlightedRingId === ring.id) {
+    colors = data.highlightColors[position];
+  }
 
-function RingCircle({ color, content, width, position }) {
-  const random = mulberry32(position);
-  return (
-    <div className="Ring-circle" style={{
-      '--color': color,
-      '--width': width,
-    }}>
-      <div className="Ring-circle-content">
-        {content.map((entry, i) => (
-          <div key={i} style={{
-            '--random': random(),
-          }}>{entry}</div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-function RingSection({ color, content, width, rotation, position, key }) {
-  const random = mulberry32(rotation+position);
-  return (
-    <div className="Ring-section" style={{
-      '--color': color,
-      '--width': width,
-      '--rotation': rotation,
-    }} key={key}>
-      <div className="Ring-section-background" />
-      <div className="Ring-section-content">
-        {content.map((entry, i) => (
-          <div key={i} style={{
-            '--random': random(),
-            '--random2': random(),
-          }}>{entry}</div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-/* <Ring radius={maxRadius * .03} colors={['#24272e']} /> */
-
-function Ring({ position = 0, radius = 1, colors = ['red'], contents = [] }) {
   return (
     <div className="Ring" style={{
       '--radius': radius,
     }}>
-      {contents.length <= 1 && RingCircle({
+      {children.length <= 1 && RingCircle({
         color: colors[0],
-        content: contents[0],
+        content: children[0],
         width: 360,
         position,
        })}
-      {contents.length > 1 && contents.map((_, i) => RingSection({
+      {children.length > 1 && children.map((_, i) => RingSection({
         color: colors[i%colors.length],
-        content: contents[i],
-        width: 360 / contents.length,
-        rotation: 360 / contents.length * i,
+        content: children[i],
+        width: 360 / children.length,
+        rotation: 360 / children.length * i,
         position,
         key: i,
        })

@@ -1,0 +1,48 @@
+.Ring-section {
+    height: 50%;
+    width: 100%;
+    overflow: hidden;
+    position: absolute;
+    transform-origin: 50% 100%;
+    transform: rotate(calc(var(--rotation) * 1deg));
+  }
+  
+  .Ring-section-background {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    transform-origin: 50% 100%;
+    transform: rotate(calc(180deg - var(--width) * 1deg));
+  }
+  
+  .Ring-section-background:before {
+    height: 200%;
+    width: 100%;
+    position: absolute;
+    content: "";
+    border-radius: 100% 100% 100% 100%;
+    background-color: var(--color);
+    transform-origin: 50% 100%;
+  }
+  
+  .Ring-section-content {
+    height: 100%;
+    width: 50%;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform-origin: left bottom;
+    transform: rotate(calc(180deg - var(--width) * 1deg - 90deg));
+  }
+  
+  .Ring-section-content > * {
+    --padding: calc(1500deg / var(--radius));
+    content: '';
+    display: block;
+    height: calc(100% - var(--random2) * 20%); /* Todo This needs to be dependent on the amount of rings */
+    position: absolute;
+    bottom: 0;
+    transform-origin: left bottom;
+    transform: rotate(calc(var(--random) * (var(--width) * 1deg - var(--padding))))
+  }
