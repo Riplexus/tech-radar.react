@@ -3,7 +3,7 @@ import TechRadar from '@Organisms/TechRadar';
 import ListRings from '@Atoms/ListRings';
 import ListSections from '@Atoms/ListSections';
 import ListItems from '@Atoms/ListItems';
-import { DataContext, DATA } from '@/data/context';
+import { DataContext, DATA } from '@/store/store';
 import './Page.css';
 
 function Page() {

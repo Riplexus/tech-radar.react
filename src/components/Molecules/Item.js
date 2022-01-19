@@ -1,5 +1,5 @@
 import { useCallback, useState, useContext } from 'react';
-import { DataContext } from '@/data/context';
+import { DataContext } from '@/store/store';
 import Tooltip from '@Atoms/Tooltip';
 import './Item.css';
 

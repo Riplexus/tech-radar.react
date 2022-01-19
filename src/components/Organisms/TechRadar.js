@@ -2,7 +2,7 @@ import {createRef, useRef, useContext} from "react";
 import Item from "@Molecules/Item";
 import Ring from "@Molecules/Ring";
 import useDimensions from "@/utils/useDimensions";
-import { DataContext } from "@/data/context";
+import { DataContext } from "@/store/store";
 import './TechRadar.css';
 
 const TechRadar = function TechRadar() {

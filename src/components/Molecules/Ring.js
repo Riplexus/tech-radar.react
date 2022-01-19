@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { DataContext } from '@/data/context';
+import { DataContext } from '@/store/store';
 import RingCircle from '@Atoms/RingCircle';
 import RingSection from '@Atoms/RingSection';
 import './Ring.css';
