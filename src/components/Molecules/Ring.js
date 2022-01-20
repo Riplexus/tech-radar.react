@@ -1,11 +1,11 @@
 import { useContext } from "react";
-import { DataContext } from "@/store/store";
+import { Context } from "@/store/data.context";
 import RingCircle from "@Atoms/RingCircle";
 import RingSection from "@Atoms/RingSection";
 import "./Ring.css";
 
 function Ring({ position = 0, children, dimensions, ring }) {
-  const { data } = useContext(DataContext);
+  const { data } = useContext(Context);
 
   const width = dimensions?.width ?? 0;
   const height = dimensions?.height ?? 0;

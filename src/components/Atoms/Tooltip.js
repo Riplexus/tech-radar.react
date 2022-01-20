@@ -1,37 +1,44 @@
-import { useLayoutEffect } from "react";
-import { createPortal } from "react-dom";
+import { useContext, forwardRef, useLayoutEffect, useState } from "react";
+import { Context } from "@/store/tooltip.context";
 import "./Tooltip.css";
 
-function Tooltip({ children, position }) {
-  const tooltipRoot = document.getElementById("tr-tooltip");
-  const rootRect = tooltipRoot.parentElement.getBoundingClientRect();
-
-  const x = position.x - rootRect.x;
-  const y = position.y - rootRect.y;
-
-  const el = document.createElement("div");
-  el.classList.add("tr-tooltip");
-  el.style = [
-    `--x: ${x};`,
-    `--y: ${y};`,
-    `--translateX: ${x < rootRect.width / 2 ? "0" : "-100"};`,
-    `--translateY: ${y < rootRect.height / 2 ? "0" : "-100"};`,
-    `--offsetX: ${x < rootRect.width / 2 ? "6" : "-6"};`,
-    `--offsetY: ${y < rootRect.height / 2 ? "6" : "-6"};`,
-    `--rotation: ${
-      x < (rootRect.width / 2 && y < rootRect.height / 2) ||
-      (x > rootRect.width / 2 && y > rootRect.height / 2)
-        ? "135deg"
-        : "45deg"
-    };`,
-  ].join(" ");
+function Tooltip(_, ref) {
+  const { tooltip } = useContext(Context);
+  const [style, setStyle] = useState();
 
   useLayoutEffect(() => {
-    if (tooltipRoot) tooltipRoot.appendChild(el);
-    return () => tooltipRoot && tooltipRoot.removeChild(el);
-  });
+    const parent = ref.current ? ref.current.parentElement : null;
 
-  return createPortal(<div>{children}</div>, el);
+    if (parent && tooltip.position) {
+      const rootRect = parent.getBoundingClientRect();
+
+      const x = tooltip.position.x - rootRect.x;
+      const y = tooltip.position.y - rootRect.y;
+
+      setStyle({
+        "--x": `${x}`,
+        "--y": `${y}`,
+        "--translateX": `${x < rootRect.width / 2 ? "0" : "-100"}`,
+        "--translateY": `${y < rootRect.height / 2 ? "0" : "-100"}`,
+        "--offsetX": `${x < rootRect.width / 2 ? "6" : "-6"}`,
+        "--offsetY": `${y < rootRect.height / 2 ? "6" : "-6"}`,
+        "--rotation": `${
+          x < (rootRect.width / 2 && y < rootRect.height / 2) ||
+          (x > rootRect.width / 2 && y > rootRect.height / 2)
+            ? "135deg"
+            : "45deg"
+        }`,
+      });
+    }
+  }, [setStyle, ref, tooltip]);
+
+  if (!tooltip.content) return null;
+
+  return (
+    <div ref={ref} className="tr-tooltip" style={style}>
+      {tooltip.content}
+    </div>
+  );
 }
 
-export default Tooltip;
+export default forwardRef(Tooltip);

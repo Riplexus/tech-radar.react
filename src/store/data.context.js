@@ -7,15 +7,19 @@ export const DATA = {
   items: ITEMS,
   rings: RINGS,
   sections: SECTIONS,
+  tooltipContent: null,
+  tooltipPosition: null,
   highlightedItemId: null,
   highlightedRingId: null,
   highlightedSectionId: null,
 };
 
-export const DataContext = createContext({
+export const Context = createContext({
   data: DATA,
   setData: () => {},
   setHighlightedItemId: () => {},
   setHighlightedRindId: () => {},
   setHighlightedSectionId: () => {},
 });
+
+Context.displayName = "DataContext";

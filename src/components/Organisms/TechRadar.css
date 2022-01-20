@@ -1,12 +1,4 @@
 .tr {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-}
-
-.tr-viewport {
   width: min(var(--width), var(--height));
   height: min(var(--width), var(--height));
   position: relative;

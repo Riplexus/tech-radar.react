@@ -1,34 +1,71 @@
-import { useCallback, useState, useContext } from "react";
-import { DataContext } from "@/store/store";
-import Tooltip from "@Atoms/Tooltip";
+import {
+  useRef,
+  useContext,
+  useLayoutEffect,
+  useState,
+  useMemo,
+  useEffect,
+} from "react";
+import { Context as DataContext } from "@/store/data.context";
+import { Context as TooltipContext } from "@/store/tooltip.context";
 import "./Item.css";
 
 function Item({ children, item, updatePosition }) {
   const { data } = useContext(DataContext);
-  const opened = data.highlightedItemId === item.id;
-  const [position, setPosition] = useState();
+  const { tooltip, setTooltip, clearTooltip } = useContext(TooltipContext);
 
-  const ref = useCallback(
-    (node) => {
-      if (node === null) return;
-      const rect = node.getBoundingClientRect();
-      const position = {
-        x: rect.x + rect.width / 2,
-        y: rect.y + rect.height / 2,
-      };
-      updatePosition(position);
-      setPosition(position);
-    },
-    [updatePosition]
+  const [position, setPosition] = useState({ x: null, y: null });
+  const ref = useRef();
+
+  const tooltipEntry = useMemo(
+    () => ({
+      position,
+      content: children,
+      itemId: item.id,
+    }),
+    [position, children, item]
   );
+  const isHighlighted = data.highlightedItemId === item.id;
+  const isCurrentTooltip = tooltip.itemId === item.id;
 
-  const classes = ["tr-item"];
-  if (opened) classes.push("tr-opened");
+  /*
+   * After mounting, persist the coordinates of this item and pass them upwards via updatePosition prop.
+   */
+
+  useLayoutEffect(() => {
+    if (ref.current === null) return;
+    const rect = ref.current.getBoundingClientRect();
+    const newPos = {
+      x: rect.x + rect.width / 2,
+      y: rect.y + rect.height / 2,
+    };
+    if (position.x === newPos.x && position.y === newPos.y) return;
+    updatePosition(newPos);
+    setPosition(newPos);
+  }, [updatePosition, position, setPosition]);
+
+  /*
+   * If this particular item is highlighted or loses highlighting, set the tooltip info accordingly.
+   */
+
+  useEffect(() => {
+    if (isHighlighted && !isCurrentTooltip) {
+      setTooltip(tooltipEntry);
+    } else if (!isHighlighted && isCurrentTooltip) {
+      clearTooltip();
+    }
+  }, [tooltipEntry, isHighlighted, isCurrentTooltip, setTooltip, clearTooltip]);
+
+  /*
+   * Templating
+   */
+
+  let className = "tr-item";
+  if (isHighlighted) className += " tr-opened";
 
   return (
-    <div ref={ref} className={classes.join(" ")}>
+    <div ref={ref} className={className}>
       <span>•</span>
-      {opened && <Tooltip position={position}>{children}</Tooltip>}
     </div>
   );
 }

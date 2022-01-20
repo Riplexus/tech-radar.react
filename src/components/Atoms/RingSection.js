@@ -1,19 +1,17 @@
 import { useContext } from "react";
-import { DataContext } from "@/store/store";
+import { Context } from "@/store/data.context";
 import mulberry32 from "@/utils/mulberry32";
 import "./RingSection.css";
 
 function RingSection({ content, width, rotation, position, part }) {
-  const { data } = useContext(DataContext);
+  const { data } = useContext(Context);
+
   const random = mulberry32(rotation + position);
+  const isHighlighted = data.highlightedSectionId === data.sections[part].id;
 
   let className = "tr-ring-section";
   if (typeof part !== "undefined") className += ` tr-ring-section-${part}`;
-  if (
-    data.sections[part] &&
-    data.highlightedSectionId === data.sections[part].id
-  )
-    className += " tr-section-highlighted";
+  if (isHighlighted) className += " tr-section-highlighted";
 
   return (
     <div

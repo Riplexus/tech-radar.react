@@ -3,11 +3,13 @@ import TechRadar from "@Organisms/TechRadar";
 import ListRings from "@Atoms/ListRings";
 import ListSections from "@Atoms/ListSections";
 import ListItems from "@Atoms/ListItems";
-import { DataContext, DATA } from "@/store/store";
+import { Context as DataContext, DATA } from "@/store/data.context";
+import { Context as TooltipContext, TOOLTIP } from "@/store/tooltip.context";
 import "./Page.css";
 
 function Page() {
   const [data, setData] = useState(DATA);
+  const [tooltip, setTooltip] = useState(TOOLTIP);
 
   const setHighlightedRingId = (highlightedRingId) => {
     setData({ ...data, highlightedRingId });
@@ -21,7 +23,7 @@ function Page() {
     setData({ ...data, highlightedItemId });
   };
 
-  const context = {
+  const dataContext = {
     data,
     setData,
     setHighlightedRingId,
@@ -29,15 +31,23 @@ function Page() {
     setHighlightedItemId,
   };
 
+  const tooltipContext = {
+    tooltip,
+    setTooltip,
+    clearTooltip: () => setTooltip(TOOLTIP),
+  };
+
   return (
     <div className="tr-page">
-      <DataContext.Provider value={context}>
-        <section>
-          <ListRings />
-          <TechRadar />
-          <ListSections />
-        </section>
-        <ListItems />
+      <DataContext.Provider value={dataContext}>
+        <TooltipContext.Provider value={tooltipContext}>
+          <section>
+            <ListRings />
+            <TechRadar />
+            <ListSections />
+          </section>
+          <ListItems />
+        </TooltipContext.Provider>
       </DataContext.Provider>
     </div>
   );

@@ -1,9 +1,9 @@
 import { useContext } from "react";
-import { DataContext } from "@/store/store";
+import { Context } from "@/store/data.context";
 import "./ListItems.css";
 
 function ListItems() {
-  const { data, setData } = useContext(DataContext);
+  const { data, setData } = useContext(Context);
 
   return (
     <section

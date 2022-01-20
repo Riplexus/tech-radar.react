@@ -44,11 +44,6 @@ li {
   padding: 3px 6px;
 }
 
-#tr-tooltip {
-  z-index: 10;
-}
-
-
 /* Theme */
 
 .tr-page {
@@ -66,7 +61,7 @@ li {
   color: #f3f1f1;
 }
 
-.tr-tooltip > * {
+.tr-tooltip {
   box-shadow: 0 0 1px 1px rgba(0, 0, 0, .3);
   background: #f3f1f1;
   color: #232427;
