@@ -10,8 +10,18 @@ function Ring({ position = 0, children, dimensions, ring }) {
   const width = dimensions?.width ?? 0;
   const height = dimensions?.height ?? 0;
   const maxRadius = Math.min(width, height) / 2;
+  const ringCount = data.rings.length;
+
+  // linear ring size
+  // const radius = (maxRadius / ringCount) * (ringCount - position);
+  // const prevRadius = (maxRadius / ringCount) * (ringCount - position - 1);
+
+  // logarithmic ring size
   const radius =
-    (maxRadius / data.rings.length) * (data.rings.length - position);
+    (Math.log(ringCount + 1 - position) / Math.log(ringCount + 1)) * maxRadius;
+  const prevRadius =
+    (Math.log(ringCount + 1 - position - 1) / Math.log(ringCount + 1)) *
+    maxRadius;
 
   let className = "tr-ring";
   if (typeof position !== "undefined") className += ` tr-ring-${position}`;
@@ -24,6 +34,8 @@ function Ring({ position = 0, children, dimensions, ring }) {
           content: children[0],
           width: 360,
           position,
+          radius,
+          prevRadius,
         })}
       {children.length > 1 &&
         children.map((_, i) =>
@@ -33,6 +45,8 @@ function Ring({ position = 0, children, dimensions, ring }) {
             rotation: (360 / children.length) * i,
             position,
             part: i,
+            radius,
+            prevRadius,
           })
         )}
     </div>

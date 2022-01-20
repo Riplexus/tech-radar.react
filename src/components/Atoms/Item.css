@@ -1,13 +1,4 @@
 .tr-item {
-  width: 8px;
-  height: 8px;
-  line-height: 4px;
-  font-size: 22px;
-  text-align: center;
-  opacity: .6;
-  transition: opacity .2s;
-}
-
-.tr-opened {
-  opacity: 1;
+  width: calc(var(--itemSize) * 1px);
+  height: calc(var(--itemSize) * 1px);
 }

@@ -37,12 +37,11 @@
 }
 
 .tr-ring-section-content > * {
-  --padding: calc(1500deg / var(--radius));
   content: '';
   display: block;
-  height: calc(100% - var(--random2) * 20%); /* Todo This needs to be dependent on the amount of rings */
+  height: calc(var(--distanceRel) * 100%);
   position: absolute;
   bottom: 0;
   transform-origin: left bottom;
-  transform: rotate(calc(var(--random) * (var(--width) * 1deg - var(--padding))))
+  transform: rotate(calc(var(--angle) * 1deg))
 }

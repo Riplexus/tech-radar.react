@@ -57,8 +57,13 @@ li {
 }
 
 .tr-item {
-  text-shadow: 0 0 2px #000000;
-  color: #f3f1f1;
+  box-shadow: 0 0 2px #000000;
+  background: #f3f1f1;
+  border-radius: 100%;
+  transition: background 0.2s;
+}
+.tr-item.tr-opened {
+  background: rgba(0, 0, 0, 0.5);
 }
 
 .tr-tooltip {

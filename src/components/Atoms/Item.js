@@ -29,7 +29,8 @@ function Item({ children, item, updatePosition }) {
   const isCurrentTooltip = tooltip.itemId === item.id;
 
   /*
-   * After mounting, persist the coordinates of this item and pass them upwards via updatePosition prop.
+   * After mounting, persist the coordinates of this item's center point
+   * and pass them upwards via updatePosition prop.
    */
 
   useLayoutEffect(() => {
@@ -64,9 +65,13 @@ function Item({ children, item, updatePosition }) {
   if (isHighlighted) className += " tr-opened";
 
   return (
-    <div ref={ref} className={className}>
-      <span>•</span>
-    </div>
+    <div
+      ref={ref}
+      className={className}
+      style={{
+        "--itemSize": data.itemSize,
+      }}
+    />
   );
 }
 
