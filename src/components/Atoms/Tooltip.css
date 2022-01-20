@@ -1,20 +1,20 @@
-.Tooltip {
+.tr-tooltip {
   position: absolute;
   top: calc(var(--y) * 1px);
   left: calc(var(--x) * 1px);
   font-size: 11px;
 }
 
-.Tooltip > * {
+.tr-tooltip > * {
   position: absolute;
   padding: 5px;
   max-width: 400px;
   transform: translate(calc(var(--translateX)*1% + var(--offsetX)*1px), calc(var(--translateY)*1% + var(--offsetY)*1px));
 }
 
-.Tooltip small {
+.tr-tooltip small {
   white-space: nowrap;
 }
-.Tooltip p {
+.tr-tooltip p {
   font-size: 11px;
 }

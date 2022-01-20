@@ -1,10 +1,10 @@
-import { useState } from 'react';
-import TechRadar from '@Organisms/TechRadar';
-import ListRings from '@Atoms/ListRings';
-import ListSections from '@Atoms/ListSections';
-import ListItems from '@Atoms/ListItems';
-import { DataContext, DATA } from '@/store/store';
-import './Page.css';
+import { useState } from "react";
+import TechRadar from "@Organisms/TechRadar";
+import ListRings from "@Atoms/ListRings";
+import ListSections from "@Atoms/ListSections";
+import ListItems from "@Atoms/ListItems";
+import { DataContext, DATA } from "@/store/store";
+import "./Page.css";
 
 function Page() {
   const [data, setData] = useState(DATA);
@@ -30,12 +30,12 @@ function Page() {
   };
 
   return (
-    <div className="Page">
+    <div className="tr-page">
       <DataContext.Provider value={context}>
         <section>
-            <ListRings />
-            <TechRadar />
-            <ListSections />
+          <ListRings />
+          <TechRadar />
+          <ListSections />
         </section>
         <ListItems />
       </DataContext.Provider>

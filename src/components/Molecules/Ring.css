@@ -1,4 +1,4 @@
-.Ring {
+.tr-ring {
   position: absolute;
   width: calc(var(--radius) * 2 * 1px);
   height: calc(var(--radius) * 2 * 1px);

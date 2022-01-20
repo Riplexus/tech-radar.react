@@ -1,4 +1,4 @@
-.TechRadar {
+.tr {
   position: relative;
   display: flex;
   align-items: center;
@@ -6,7 +6,7 @@
   overflow: hidden;
 }
 
-.TechRadar-viewport {
+.tr-viewport {
   width: min(var(--width), var(--height));
   height: min(var(--width), var(--height));
   position: relative;
@@ -17,10 +17,3 @@
   cursor: pointer;
   user-select: none;
 }
-
-.TechRadar-tooltip {
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-

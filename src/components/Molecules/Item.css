@@ -1,4 +1,4 @@
-.Item {
+.tr-item {
   width: 8px;
   height: 8px;
   line-height: 4px;
@@ -8,10 +8,6 @@
   transition: opacity .2s;
 }
 
-.highlighted {
-  opacity: .75;
-}
-
-.opened {
+.tr-opened {
   opacity: 1;
 }

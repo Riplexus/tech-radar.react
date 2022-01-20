@@ -27,7 +27,7 @@ function Ring({
   }
 
   return (
-    <div className="Ring" style={{
+    <div className={`tr-ring tr-ring-${position}`} style={{
       '--radius': radius,
     }}>
       {children.length <= 1 && RingCircle({

@@ -4,13 +4,13 @@ import "./RingSection.css";
 function RingSection({ color, content, width, rotation, position, key }) {
     const random = mulberry32(rotation+position);
     return (
-      <div className="Ring-section" style={{
+      <div className="tr-ring-section" style={{
         '--color': color,
         '--width': width,
         '--rotation': rotation,
       }} key={key}>
-        <div className="Ring-section-background" />
-        <div className="Ring-section-content">
+        <div className="tr-ring-section-background" />
+        <div className="tr-ring-section-content">
           {content.map((entry, i) => (
             <div key={i} style={{
               '--random': random(),

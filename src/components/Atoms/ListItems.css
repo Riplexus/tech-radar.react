@@ -1,0 +1,17 @@
+.tr-listitems {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  margin-top: 12px;
+}
+.tr-listitems > ul {
+  flex: 1.2;
+}
+.tr-listitems li {
+  margin: 0;
+}
+.tr-listitems h3 {
+  font-size: 1rem;
+  margin-bottom: 6px;
+  font-weight: normal;
+}

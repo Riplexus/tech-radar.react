@@ -1,4 +1,4 @@
-.Page {
+.tr-page {
   min-height: calc(100vh - 24px);
   flex-direction: column;
   align-items: center;
@@ -6,7 +6,7 @@
   font-size: calc(10px + 2vmin);
   padding: 24px;
 }
-.Page .TechRadar {
+.tr-page .tr {
   min-height: 70vh;
 }
 section {
@@ -19,10 +19,10 @@ section {
 section > * {
   flex: 1;
 }
-section > .TechRadar {
+section > .tr {
   flex: 2;
 }
-section:not(.ItemList) > *:last-child:not(:first-child) {
+section:not(.tr-itemlist) > *:last-child:not(:first-child) {
   text-align: right;
 }
 
@@ -44,63 +44,29 @@ li {
   padding: 3px 6px;
 }
 
-.ItemList {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  margin-top: 12px;
-}
-.ItemList > ul {
-  flex: 1.2;
-}
-.ItemList li {
-  margin: 0;
-}
-.ItemList h3 {
-  font-size: 1rem;
-  margin-bottom: 6px;
-  font-weight: normal;
-}
-
-.Page .TechRadar:before {
-  content: '';
-  background-image: url("@/assets/logo_negativ.png");
-  background-size: 15px 15px;
-  background-repeat: no-repeat;
-  background-position: center;
-  width: 30px;
-  height: 30px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: rgba(255, 255, 255, .2);
-  border-radius: 50%;
-  z-index: 1;
-}
-#TechRadar-tooltip {
+#tr-tooltip {
   z-index: 10;
 }
 
 
 /* Theme */
 
-.Page {
+.tr-page {
   background-color: #f3f1f1;
   color: #232427;
 }
 
-.Page ::selection {
+.tr-page ::selection {
   background: #282c34;
   color: #bec6d4;
 }
 
-.Item {
+.tr-item {
   text-shadow: 0 0 2px #000000;
   color: #f3f1f1;
 }
 
-.Tooltip > * {
+.tr-tooltip > * {
   box-shadow: 0 0 1px 1px rgba(0, 0, 0, .3);
   background: #f3f1f1;
   color: #232427;
