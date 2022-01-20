@@ -1,6 +1,6 @@
 import { createRef, useRef, useContext, useState } from "react";
 import Tooltip from "@Atoms/Tooltip";
-import Item from "@Molecules/Item";
+import Item from "@Atoms/Item";
 import Ring from "@Molecules/Ring";
 import useDimensions from "@/utils/useDimensions";
 import { Context } from "@/store/data.context";
